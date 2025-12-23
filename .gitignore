@@ -1,55 +1,14 @@
-####################################
 # Terraform
-####################################
 .terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
 .terraform.lock.hcl
 
-*.tfstate
-*.tfstate.*
-crash.log
-crash.*.log
-
-# Sensitive tfvars (optional – prod best practice)
-*.tfvars
-!example.tfvars
-
-####################################
-# Terraform override files
-####################################
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-
-####################################
-# Azure
-####################################
-.azure/
-azureProfile.json
-
-####################################
-# Logs
-####################################
-*.log
-
-####################################
-# OS / Editor
-####################################
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# VS Code
+# IDE
 .vscode/
-*.code-workspace
+.idea/
 
-# macOS
+# OS
 .DS_Store
-
-####################################
-# Node / Python (just in case)
-####################################
-node_modules/
-__pycache__/
-*.pyc
+Thumbs.db
