@@ -1,1 +1,3 @@
-variable "rgs" { type = any }
+variable "rgs" {}
+variable "storage_accounts" {}
+variable "networks" {}
