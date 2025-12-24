@@ -1,3 +1,10 @@
-variable "rgs" {}
-variable "storage_accounts" {}
-variable "networks" {}
+variable "rgs" { type = any }
+variable "networks" { type = any }
+variable "vms" { type = any }
+variable "storage_accounts" { type = any }
+variable "public_ips" { type = any }
+variable "key_vault_id" { type = string }
+variable "key_vaults" {
+  type = any
+}
+

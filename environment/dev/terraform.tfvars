@@ -45,3 +45,39 @@ networks = {
     }
   }
 }
+
+vms = {
+  frontend = {
+    name  = "vm-frontend"
+    rg_key = "dev"
+    subnet_key = "frontend"
+    admin_username_secret = "vm-frontend-user"
+    admin_password_secret = "vm-frontend-pass"
+  }
+
+  backend = {
+    name  = "vm-backend"
+    rg_key = "dev"
+    subnet_key = "backend"
+    admin_username_secret = "vm-backend-user"
+    admin_password_secret = "vm-backend-pass"
+  }
+}
+
+
+public_ips = {
+  frontend = {
+    name   = "pip-frontend"
+    rg_key = "dev"
+    location = "eastus"
+    tags = { env = "dev" }
+  }
+}
+
+key_vaults = {
+  app = {
+    name   = "kvdevapp1234"
+    rg_key = "dev"
+    location = "eastus"
+  }
+}
