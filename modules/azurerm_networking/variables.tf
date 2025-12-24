@@ -1,15 +1,14 @@
 variable "networks" {
   type = map(object({
-    name                = string
-    resource_group_name = string
-    location            = string
-    address_space       = list(string)
-
+    name          = string
+    rg_key        = string
+    location      = string
+    address_space = list(string)
     subnets = map(object({
       name             = string
       address_prefixes = list(string)
     }))
-
     tags = map(string)
   }))
 }
+variable "rg_names" { type = map(string) }
