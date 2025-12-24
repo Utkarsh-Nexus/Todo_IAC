@@ -4,7 +4,8 @@ variable "vms" { type = any }
 variable "storage_accounts" { type = any }
 variable "public_ips" { type = any }
 variable "key_vault_id" { type = string }
-variable "key_vaults" {
-  type = any
-}
+variable "key_vaults" { type = any}
+variable "sql_servers"   { type = any }
+variable "sql_databases" { type = any }
+
 

@@ -81,3 +81,20 @@ key_vaults = {
     location = "eastus"
   }
 }
+sql_servers = {
+  dev = {
+    name   = "sqlsrv-dev-app"
+    rg_key = "dev"
+    location = "eastus"
+    admin_username_secret = "sql-admin-user"
+    admin_password_secret = "sql-admin-pass"
+  }
+}
+
+sql_databases = {
+  appdb = {
+    name      = "todoappdb"
+    server_key = "dev"
+    sku_name  = "Basic"
+  }
+}

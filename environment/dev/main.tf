@@ -34,3 +34,15 @@ module "key_vault" {
   key_vaults = var.key_vaults
   rg_names   = module.rg.rg_names
 }
+module "sql_server" {
+  source       = "../../modules/azurerm_sql_server"
+  sql_servers  = var.sql_servers
+  rg_names     = module.rg.rg_names
+  key_vault_id = module.key_vault.key_vault_ids["app"]
+}
+
+module "sql_database" {
+  source         = "../../modules/azurerm_sql_database"
+  sql_databases  = var.sql_databases
+  sql_server_ids = module.sql_server.sql_server_ids
+}
