@@ -1,0 +1,16 @@
+trigger:
+  branches:
+    include:
+      - feature/*
+
+pool:
+  name: Todoapp
+  demands:
+    - Agent.Name -equals myagent
+
+steps:
+- script: |
+    echo "Agent: $(Agent.Name)"
+    echo "Branch: $(Build.SourceBranchName)"
+    terraform version
+  displayName: "Verify agent & terraform"
