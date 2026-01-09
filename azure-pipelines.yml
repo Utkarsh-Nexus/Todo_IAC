@@ -8,9 +8,33 @@ pool:
   demands:
     - Agent.Name -equals myagent
 
-steps:
-- script: |
-    echo "Agent: $(Agent.Name)"
-    echo "Branch: $(Build.SourceBranchName)"
-    terraform version
-  displayName: "Verify agent & terraform"
+variables:
+  workDir: '$(System.DefaultWorkingDirectory)/environment/dev'
+
+stages:
+- stage: PreCommit
+  displayName: Pre-Commit / Static Analysis
+  jobs:
+  - job: TerraformInit
+    displayName: Terraform Init & Validate
+    steps:
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: '1.6.5'
+
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: $(workDir)
+        backendServiceArm: 'tododappsp'
+        backendAzureRmResourceGroupName: 'tfstate-rg'
+        backendAzureRmStorageAccountName: 'todotfstate27'
+        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmKey: 'dev.terraform.tfstate'
+
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+        workingDirectory: $(workDir)
