@@ -7,5 +7,5 @@ variable "key_vault_id" { type = string }
 variable "key_vaults" { type = any}
 variable "sql_servers"   { type = any }
 variable "sql_databases" { type = any }
-
+variable "kv_allowed_ips" { type = list(string) }
 

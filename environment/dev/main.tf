@@ -33,6 +33,8 @@ module "key_vault" {
   source     = "../../modules/azurerm_key_vault"
   key_vaults = var.key_vaults
   rg_names   = module.rg.rg_names
+  kv_allowed_ips = var.kv_allowed_ips
+
 }
 module "sql_server" {
   source       = "../../modules/azurerm_sql_server"

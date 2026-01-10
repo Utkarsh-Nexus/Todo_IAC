@@ -19,4 +19,7 @@ resource "azurerm_mssql_server" "sql" {
   version                      = "12.0"
   administrator_login          = data.azurerm_key_vault_secret.sql_user[each.key].value
   administrator_login_password = data.azurerm_key_vault_secret.sql_pass[each.key].value
+  public_network_access_enabled = false
+  minimum_tls_version = "1.2"
+
 }

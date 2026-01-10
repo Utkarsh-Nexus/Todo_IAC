@@ -98,3 +98,4 @@ sql_databases = {
     sku_name  = "Basic"
   }
 }
+kv_allowed_ips = ["103.92.45.18/32"]
