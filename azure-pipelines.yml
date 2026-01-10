@@ -12,29 +12,42 @@ variables:
   workDir: '$(System.DefaultWorkingDirectory)/environment/dev'
 
 stages:
-- stage: PreCommit
-  displayName: Pre-Commit / Static Analysis
-  jobs:
-  - job: TerraformInit
-    displayName: Terraform Init & Validate
-    steps:
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: '1.6.5'
+  - stage: PreCommit
+    displayName: Pre-Commit / Static Analysis
+    jobs:
+      - job: TerraformInit
+        displayName: Terraform Init & Validate
+        steps:
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: '1.6.5'
 
-    - task: TerraformTaskV4@4
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: $(workDir)
-        backendServiceArm: 'tododappsp'
-        backendAzureRmResourceGroupName: 'tfstate-rg'
-        backendAzureRmStorageAccountName: 'todotfstate27'
-        backendAzureRmContainerName: 'tfstate'
-        backendAzureRmKey: 'dev.terraform.tfstate'
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(workDir)'
+              backendServiceArm: 'tododappsp'
+              backendAzureRmResourceGroupName: 'tfstate-rg'
+              backendAzureRmStorageAccountName: 'todotfstate27'
+              backendAzureRmContainerName: 'tfstate'
+              backendAzureRmKey: 'dev.terraform.tfstate'
 
-    - task: TerraformTaskV4@4
-      inputs:
-        provider: 'azurerm'
-        command: 'validate'
-        workingDirectory: $(workDir)
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+              workingDirectory: '$(workDir)'
+
+      - job: TerraformFmt
+        displayName: Terraform Format Check
+        dependsOn: TerraformInit
+        steps:
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'custom'
+              workingDirectory: '$(workDir)'
+              outputTo: 'console'
+              customCommand: 'fmt'
+              environmentServiceNameAzureRM: 'tododappsp'
